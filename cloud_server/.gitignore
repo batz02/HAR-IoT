@@ -1,0 +1,24 @@
+# Ambienti Virtuali Python
+venv/
+env/
+.venv/
+env.bak/
+v/
+
+# Cache e file compilati Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Variabili d'ambiente e Secrets
+.env
+.env.*
+!.env.example 
+
+# Log e file temporanei
+*.log
+logs/
+
+# MacOS files
+.DS_Store

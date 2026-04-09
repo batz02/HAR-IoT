@@ -1,0 +1,22 @@
+services:
+  mqtt-broker:
+    image: eclipse-mosquitto:latest
+    container_name: fog_mqtt_broker
+    ports:
+      - "1883:1883"
+    volumes:
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+    restart: unless-stopped
+
+  fog-worker:
+    build: .
+    container_name: fog_python_worker
+    depends_on:
+      - mqtt-broker
+    volumes:
+      - ./model:/app/model
+    environment:
+      - MQTT_BROKER=mqtt-broker
+      - MQTT_PORT=1883
+      - MQTT_TOPIC=iot/har/offload
+    restart: unless-stopped
